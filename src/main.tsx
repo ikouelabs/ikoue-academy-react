@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
-import App from './03/App2.tsx'
+import CountryApp from './03/CountryApp.tsx'
 
 createRoot(document.getElementById('root')!).render(
-    <App  />
+    <CountryApp  />
 )
