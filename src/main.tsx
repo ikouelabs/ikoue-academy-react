@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
-import CapitalesApp from './04/Capitales'
+import App02 from './05/App02'
+import './index.css'
 
 createRoot(document.getElementById('root')!).render(
-    <CapitalesApp  />
+    <App02  />
 )

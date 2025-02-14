@@ -12,7 +12,6 @@ const capitals:Record<string,string> = {
 export default function CapitalesApp() {
 
     const [country, setCountry] = useState('Centrafrique');
-
     const capital = capitals[country];
   
     return (
