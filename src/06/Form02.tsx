@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 
 export default function Form02() {
@@ -18,6 +18,18 @@ export default function Form02() {
         resetForm();
     }
 
+    function handleChangeTo(event: ChangeEvent<HTMLInputElement>) {
+        setTo(event.target.value)
+    }
+
+    function handleChangeSubject(event: ChangeEvent<HTMLInputElement>) {
+        setSubject(event.target.value)
+    }
+
+    function handleChangeMessage(event: ChangeEvent<HTMLTextAreaElement>) {
+        setMessage(event.target.value)
+    }
+
     return (
         <div className="p-12 space-y-2">
 
@@ -26,7 +38,7 @@ export default function Form02() {
                     <label>Destinataire <span className="text-red-500">*</span></label>
                     <input type="email" value={to}
                            required
-                           onChange={(event) => setTo(event.target.value)}
+                           onChange={handleChangeTo}
                            className="block border p-1" placeholder="contact@email.com"/>
                 </div>
 
@@ -34,7 +46,7 @@ export default function Form02() {
                     <label>Sujet du message <span className="text-red-500">*</span></label>
                     <input type="text" value={subject}
                            required
-                           onChange={(event) => setSubject(event.target.value)}
+                           onChange={handleChangeSubject}
                            className="block border p-1" placeholder="Sujet"/>
                 </div>
 
@@ -42,7 +54,7 @@ export default function Form02() {
                     <label>Message <span className="text-red-500">*</span></label>
                     <textarea value={message}
                               required
-                              onChange={(event) => setMessage(event.target.value)}
+                              onChange={handleChangeMessage}
                               className="block border p-1" placeholder="Le contenu de votre message"/>
                 </div>
 
