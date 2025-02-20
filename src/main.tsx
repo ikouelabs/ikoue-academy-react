@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
-import App02 from './05/App02'
 import './index.css'
+import Form02 from "./06/Form02.tsx";
 
 createRoot(document.getElementById('root')!).render(
-    <App02  />
+    <Form02  />
 )
