@@ -7,7 +7,6 @@ export default function Form02() {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
 
-
     function resetForm() {
         setTo("");
         setSubject("");
