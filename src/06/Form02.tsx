@@ -22,7 +22,7 @@ export default function Form02() {
     return (
         <div className="p-12 space-y-2">
 
-            <form>
+            <form onSubmit={sendMessage}>
                 <div>
                     <label>Destinataire <span className="text-red-500">*</span></label>
                     <input type="email" value={to}
