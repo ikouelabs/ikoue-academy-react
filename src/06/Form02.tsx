@@ -37,7 +37,9 @@ export default function Form02() {
       // Envoyer au backend
       // Gérer les messages d'erreur
 
-      if (form.subject.length < 10) {
+      if (form.to.includes("@gmail.com")) {
+        setError("Le destinataire ne peut pas être une adresse Gmail.");
+      }else if (form.subject.length < 10) {
         setError("Le sujet doit comporter au moins 10 caractères.");
       } else {
         setError("");
@@ -106,7 +108,7 @@ export default function Form02() {
           {error && (
             <div className="bg-red-50  p-3 text-red-500 text-xs flex items-center space-x-2">
             <BiError />
-            <span>Le formulaire comporte des erreurs.</span>
+            <span>{error}</span>
           </div>)}
         </div>
     )
