@@ -15,10 +15,10 @@ export default function RandomBookApp() {
     const [lang, setLang] = useState('fr')
     const [book, setBook] = useState<Book|null>(null);
 
-    async function handleNextBook() {
+    async function handleNextBook(l?:string) {
         // Utilise l'API pour retourner de façon aléatoire un liver
         // de la saga Harry Potter
-        const res = await fetch(`https://potterapi-fedeperin.vercel.app/${lang}/books/random`);
+        const res = await fetch(`https://potterapi-fedeperin.vercel.app/${l ?? lang}/books/random`);
         const data = await res.json();
         setBook(data);
     }
@@ -27,7 +27,7 @@ export default function RandomBookApp() {
         // Changer la langue
         setLang(value);
         // Afficher le livre suivant avec la nouvelle langue choisir
-        handleNextBook();
+        handleNextBook(value);
     }
 
     useEffect(function() {
