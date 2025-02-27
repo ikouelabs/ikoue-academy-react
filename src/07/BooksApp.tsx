@@ -9,10 +9,10 @@ interface Book {
     description: string
 }
 
+/*
 const booksData:Array<Book> = [
     {
         title: "Livre 01",
-        author: "John DOE",
         cover: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
         releaseDate: "01/01/2024",
         pages: 125,
@@ -20,7 +20,6 @@ const booksData:Array<Book> = [
     },
     {
         title: "Livre 02",
-        author: "John DOE",
         cover: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
         releaseDate: "01/01/2024",
         pages: 125,
@@ -28,7 +27,6 @@ const booksData:Array<Book> = [
     },
     {
         title: "Livre 03",
-        author: "John DOE",
         cover: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
         releaseDate: "01/01/2024",
         pages: 125,
@@ -36,14 +34,13 @@ const booksData:Array<Book> = [
     },
     {
         title: "Livre 04",
-        author: "John DOE",
         cover: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
         releaseDate: "01/01/2024",
         pages: 125,
         description: "Description du livre"
     }
 ]
-
+*/
 
 export default function BookApp() {
     // HOOKS

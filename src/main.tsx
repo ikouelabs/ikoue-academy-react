@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import BookApp from './07/BooksApp.tsx';
+import RandomBookApp from './07/RandomBook.tsx';
 
 createRoot(document.getElementById('root')!).render(
-    <BookApp  />
+    <RandomBookApp  />
 )
