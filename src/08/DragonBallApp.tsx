@@ -4,34 +4,19 @@ import { useEffect, useState } from "react"
 interface Character {
     id: string
     name: string
-    ki: string
-    maxKi: string
     race: string
     gender: string
-    description: string
     image: string
-    affiliation: string
 }
 
 interface Metadata {
-    totalItems: number
-    itemCount: number
-    itemsPerPage: number
     totalPages: number
     currentPage: number
-}
-
-interface Links {
-    first: string
-    previous: string
-    next: string
-    last: string
 }
 
 interface GetCharacterResponse {
     items: Character[]
     meta: Metadata
-    links: Links
 }
 
 export default function DragonBallApp() {
@@ -39,14 +24,14 @@ export default function DragonBallApp() {
     // install axios
     const [data, setData] = useState<GetCharacterResponse | null>(null);
 
-    async function loadData() {
+    async function loadData(page:number) {
         /*
         const res = await fetch('https://dragonball-api.com/api/characters')
         const result = await res.json();
         setData(result);
         */
 
-        const res = await axios.get('https://dragonball-api.com/api/characters');
+        const res = await axios.get(`https://dragonball-api.com/api/characters?page=${page ?? 1}&limit=8`);
         setData(res.data);
 
     }
@@ -62,7 +47,7 @@ export default function DragonBallApp() {
     }
 
     return (
-        <div className="p-8 text-center font-bold w-screen h-screen bg-gray-800">
+    <div className="pt-8 pb-24 text-center font-bold w-screen h-screen ">
         <div className="flex items-center place-content-center">
             <img src="https://web.dragonball-api.com/images-compress/logo_dragonballapi.webp" 
                 className="h-40 w-auto inline-block"
@@ -87,7 +72,25 @@ export default function DragonBallApp() {
                     </div>
                 )
             }) }
-            
+        </div>
+
+        <div className=" container mx-auto max-w-6xl py-8">
+
+                <div>Page {data.meta.currentPage} / {data.meta.totalPages}</div>
+
+                <div className="flex items-center place-content-between">
+                    <div>{data.meta.currentPage > 1 && (
+                        <button 
+                            onClick={() => loadData(data.meta.currentPage - 1)}
+                            className="bg-black text-white rounded px-4 py-2">Previous</button>
+                        )}</div>
+                    
+                    {data.meta.currentPage < data.meta.totalPages && (
+                        <button 
+                        onClick={() => loadData(data.meta.currentPage + 1)}
+                        className="bg-black text-white rounded px-4 py-2">Next</button>
+                    )}
+                </div>
         </div>
     </div>
     )
