@@ -31,17 +31,17 @@ export default function DragonBallApp() {
     useEffect(function(){
         // Créer un délai artificiel pour charger les données
         // 2s après l'affichage initial de notre page.
-        setTimeout(loadData, 1000 * 2);
+        setTimeout(loadData, 1000);
     }, []);
 
     if (!data) return <EmptyState />
 
     return (
-    <div className="pt-8 pb-24 text-center font-bold w-screen h-screen ">
-        <Header />
-        <CharacterList items={data.items} />
-        <Pagination currentPage={data.meta.currentPage} totalPages={data.meta.totalPages} loadData={loadData} />
-    </div>
+        <div className="pt-8 pb-24 text-center font-bold w-screen h-screen ">
+            <Header />
+            <CharacterList items={data.items} />
+            <Pagination currentPage={data.meta.currentPage} totalPages={data.meta.totalPages} loadData={loadData} />
+        </div>
     )
 }
 
@@ -50,7 +50,7 @@ function Header() {
     return (
     <div className="flex items-center place-content-center">
         <img src="https://web.dragonball-api.com/images-compress/logo_dragonballapi.webp" 
-            className="h-40 w-auto inline-block"
+            className="h-32 w-auto inline-block"
             />
     </div>
     )
@@ -107,9 +107,9 @@ const Pagination = (props: PaginationProps) => {
             <div>Page {props.currentPage} / {props.totalPages}</div>
             <div className="flex items-center place-content-between">
                 <div>
-                    {showPrevButton &&  <button  onClick={handleNextPage} className="bg-black text-white rounded px-4 py-2">Previous</button>}
+                    {showPrevButton &&  <button  onClick={handlePreviousPage} className="bg-black text-white rounded px-4 py-2">Previous</button>}
                 </div>
-                {showNextButton && <button  onClick={handlePreviousPage} className="bg-black text-white rounded px-4 py-2">Next</button>}
+                {showNextButton && <button  onClick={handleNextPage} className="bg-black text-white rounded px-4 py-2">Next</button>}
             </div>
         </div>
     )
