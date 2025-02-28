@@ -21,19 +21,11 @@ interface GetCharacterResponse {
 
 export default function DragonBallApp() {
 
-    // install axios
     const [data, setData] = useState<GetCharacterResponse | null>(null);
 
     async function loadData(page:number) {
-        /*
-        const res = await fetch('https://dragonball-api.com/api/characters')
-        const result = await res.json();
-        setData(result);
-        */
-
         const res = await axios.get(`https://dragonball-api.com/api/characters?page=${page ?? 1}&limit=8`);
         setData(res.data);
-
     }
 
     useEffect(function(){
@@ -42,60 +34,86 @@ export default function DragonBallApp() {
         setTimeout(loadData, 1000 * 2);
     }, []);
 
-    if (!data) {
-        return <EmptyState />
-    }
+    if (!data) return <EmptyState />
 
     return (
     <div className="pt-8 pb-24 text-center font-bold w-screen h-screen ">
-        <div className="flex items-center place-content-center">
-            <img src="https://web.dragonball-api.com/images-compress/logo_dragonballapi.webp" 
-                className="h-40 w-auto inline-block"
-                />
-        </div>
-
-        <div className="container mx-auto max-w-6xl grid grid-cols-4 gap-12 pt-12">
-            { data.items.map(function(p) {
-                return (
-                    <div key={p.id} className="bg-gray-200 rounded-lg relative flex flex-col">
-                        <div className="flex w-full items-center place-content-center">
-                            <img src={p.image} alt="" className="h-72 -mt-4 hover:scale-125 transition-all duration-700" />
-                        </div>
-                        <div className="w-full text-left bg-gray-500 p-4">
-                            <div className="text-white font-bold text-lg">{p.name}</div>
-                            <div className="text-yellow-300">
-                                <span>{p.race}</span>
-                                <span>&mdash;</span>
-                                <span>{p.gender}</span>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }) }
-        </div>
-
-        <div className=" container mx-auto max-w-6xl py-8">
-
-                <div>Page {data.meta.currentPage} / {data.meta.totalPages}</div>
-
-                <div className="flex items-center place-content-between">
-                    <div>{data.meta.currentPage > 1 && (
-                        <button 
-                            onClick={() => loadData(data.meta.currentPage - 1)}
-                            className="bg-black text-white rounded px-4 py-2">Previous</button>
-                        )}</div>
-                    
-                    {data.meta.currentPage < data.meta.totalPages && (
-                        <button 
-                        onClick={() => loadData(data.meta.currentPage + 1)}
-                        className="bg-black text-white rounded px-4 py-2">Next</button>
-                    )}
-                </div>
-        </div>
+        <Header />
+        <CharacterList items={data.items} />
+        <Pagination currentPage={data.meta.currentPage} totalPages={data.meta.totalPages} loadData={loadData} />
     </div>
     )
 }
 
+
+function Header() {
+    return (
+    <div className="flex items-center place-content-center">
+        <img src="https://web.dragonball-api.com/images-compress/logo_dragonballapi.webp" 
+            className="h-40 w-auto inline-block"
+            />
+    </div>
+    )
+}
+
+interface CharacterListProps {
+    items: Character[]
+}
+
+const CharacterList = (props: CharacterListProps) => (
+    <div className="container mx-auto max-w-6xl grid grid-cols-4 gap-12 pt-12">
+        { props.items.map(function(p) {
+            return (
+                <div key={p.id} className="bg-gray-200 rounded-lg relative flex flex-col">
+                    <div className="flex w-full items-center place-content-center">
+                        <img src={p.image} alt="" className="h-72 -mt-4 hover:scale-125 transition-all duration-700" />
+                    </div>
+                    <div className="w-full text-left bg-gray-500 p-4">
+                        <div className="text-white font-bold text-lg">{p.name}</div>
+                        <div className="text-yellow-300">
+                            <span>{p.race}</span>
+                            <span>&mdash;</span>
+                            <span>{p.gender}</span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }) }
+    </div>
+)
+
+
+interface PaginationProps {
+    currentPage: number
+    totalPages: number
+    loadData: (page: number) => void
+}
+
+const Pagination = (props: PaginationProps) => {
+
+    const showNextButton = props.currentPage < props.totalPages;
+    const showPrevButton = props.currentPage > 1;
+
+    function handleNextPage() {
+        props.loadData(props.currentPage + 1)
+    }
+
+    function handlePreviousPage() {
+        props.loadData(props.currentPage - 1)
+    }
+
+    return (
+        <div className="container mx-auto max-w-6xl py-8">
+            <div>Page {props.currentPage} / {props.totalPages}</div>
+            <div className="flex items-center place-content-between">
+                <div>
+                    {showPrevButton &&  <button  onClick={handleNextPage} className="bg-black text-white rounded px-4 py-2">Previous</button>}
+                </div>
+                {showNextButton && <button  onClick={handlePreviousPage} className="bg-black text-white rounded px-4 py-2">Next</button>}
+            </div>
+        </div>
+    )
+}
 
 
 const EmptyState = () => (
