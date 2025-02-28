@@ -66,7 +66,7 @@ const CharacterList = (props: CharacterListProps) => (
             return (
                 <div key={p.id} className="bg-gray-200 rounded-lg relative flex flex-col">
                     <div className="flex w-full items-center place-content-center">
-                        <img src={p.image} alt="" className="h-72 -mt-4 hover:scale-125 transition-all duration-700" />
+                        <img src={p.image} alt="" className="h-72 scale-110 hover:scale-125 transition-all duration-700" />
                     </div>
                     <div className="w-full text-left bg-gray-500 p-4">
                         <div className="text-white font-bold text-lg">{p.name}</div>
